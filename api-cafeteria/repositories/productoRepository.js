@@ -11,9 +11,20 @@ const obtenerProductos = (callback) => {
         }
     });
 };
-module.exports = {
-    obtenerProductos
+
+const crearProducto = (producto, callback) => {
+    const sql = "INSERT INTO productos (nombre, precio) VALUES (?, ?)";
+
+    db.query(sql, [producto.nombre, producto.precio], (err, resultado) => {
+        if (err) {
+            callback(err, null);
+        } else {
+            callback(null, resultado);
+        }
+    });
 };
 
-
-console.log(db);
+module.exports = {
+    obtenerProductos,
+    crearProducto
+};

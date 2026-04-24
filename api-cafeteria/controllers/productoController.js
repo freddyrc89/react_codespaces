@@ -10,6 +10,19 @@ const obtenerProductos = (req, res) => {
     });
 };
 
+const crearProducto = (req, res) => {
+    const nuevoProducto = req.body;
+
+    productoService.crearProducto(nuevoProducto, (err, resultado) => {
+        if (err) {
+            res.status(500).json({ error: "Error al crear producto" });
+        } else {
+            res.status(201).json(resultado);
+        }
+    });
+};
+
 module.exports = {
-    obtenerProductos
+    obtenerProductos,
+    crearProducto
 };
